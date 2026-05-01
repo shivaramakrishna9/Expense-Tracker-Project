@@ -1,0 +1,48 @@
+# 🔐 Environment variables (VERY IMPORTANT)
+.env
+.env.*
+
+# 🐍 Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 🧪 Testing / coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# 📦 Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# 🧰 IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 🗄️ Database files (if any local)
+*.db
+*.sqlite3
+
+# 📝 Logs
+*.log
+
+# 🐳 Docker (if you add later)
+*.env.docker
+
+# 📂 OS files
+.DS_Store
+Thumbs.db
+
+# 🔄 Alembic migrations (optional)
+# Uncomment if you DON'T want to track migrations
+# alembic/versions/
+
+# 🔐 Secrets / keys
+*.pem
+*.key
