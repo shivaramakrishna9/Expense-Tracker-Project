@@ -1,14 +1,16 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
 from app.core.config import settings
 
-engine = create_engine(settings.DATABASE_URI)
 
-SessionLocal = sessionmaker(
-    autocommit = False,
-    autoflush=False,
-    bind=engine
-)
+connect_args = {}
+if settings.DATABASE_URI.startswith("sqlite"):
+    connect_args = {"check_same_thread": False}
+
+engine = create_engine(settings.DATABASE_URI, connect_args=connect_args)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
 
 def get_db():
     db = SessionLocal()
@@ -16,3 +18,4 @@ def get_db():
         yield db
     finally:
         db.close()
+
