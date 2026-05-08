@@ -34,7 +34,7 @@ Expense-Tracker-Project/
 ## Backend Setup (FastAPI)
 
 ```powershell
-cd "C:\Users\ADMIN\Desktop\ExpenseTracker\Expense-Tracker-Project\backend"
+cd "C:\Users\YourName\Desktop\ExpenseTracker\Expense-Tracker-Project\backend"
 
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -54,7 +54,7 @@ Backend URLs:
 ## Frontend Setup (React + Vite)
 
 ```powershell
-cd "C:\Users\ADMIN\Desktop\ExpenseTracker\Expense-Tracker-Project\frontend"
+cd "C:\Users\YourName\Desktop\ExpenseTracker\Expense-Tracker-Project\frontend"
 npm install
 npm run dev
 ```
