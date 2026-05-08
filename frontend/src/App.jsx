@@ -1,7 +1,11 @@
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import FormPage from "./pages/FormPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -14,7 +18,14 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path="/form" element={<FormPage />} />
-        <Route path="/dashboard" element={<h1>Dashboard Coming Soon</h1>} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

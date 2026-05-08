@@ -1,0 +1,422 @@
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── Page header ──────────────────────────────────── */
+.pageHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.title {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: #1A1F36;
+}
+
+.grad {
+  background: linear-gradient(135deg, #6C63FF, #FF6B6B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub {
+  font-size: 0.82rem;
+  color: #9CA3AF;
+  margin-top: 4px;
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #6C63FF, #8B84FF);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-family: 'Clash Display', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(108,99,255,0.35);
+  transition: all 0.2s;
+}
+
+.addBtn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(108,99,255,0.45); }
+
+/* ── Summary chips ────────────────────────────────── */
+.summaryRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 760px) { .summaryRow { grid-template-columns: repeat(2, 1fr); } }
+
+.summChip {
+  padding: 18px 20px;
+  border-top: 3px solid var(--c);
+}
+
+.summLabel {
+  font-size: 0.7rem;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.summValue {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--c);
+}
+
+/* ── Two col ──────────────────────────────────────── */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+}
+
+@media (max-width: 860px) { .twoCol { grid-template-columns: 1fr; } }
+
+/* ── Category card ────────────────────────────────── */
+.catCard { padding: 28px; }
+
+.cardTitle {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1A1F36;
+  margin-bottom: 20px;
+}
+
+.catList { display: flex; flex-direction: column; gap: 14px; }
+
+.catRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 6px 12px;
+  align-items: center;
+}
+
+.catLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.catIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.catName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1A1F36;
+}
+
+.catCount {
+  font-size: 0.7rem;
+  color: #9CA3AF;
+  margin-top: 1px;
+}
+
+.catRight {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: right;
+}
+
+.catAmount {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1A1F36;
+}
+
+.catPct {
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.barWrap {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  height: 6px;
+  background: rgba(107,114,128,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.8s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0 4px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  font-family: 'Clash Display', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1A1F36;
+}
+
+/* ── Bar chart ────────────────────────────────────── */
+.chartCard {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.barChart {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  height: 220px;
+  padding-top: 32px;
+  flex-wrap: wrap;
+}
+
+.barGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 40px;
+}
+
+.barColWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 160px;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.barLabel {
+  font-size: 0.62rem;
+  color: #9CA3AF;
+  margin-bottom: 4px;
+}
+
+.barCol {
+  width: 100%;
+  max-width: 36px;
+  height: 100%;
+  background: rgba(107,114,128,0.08);
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.barFill {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  transition: height 0.8s cubic-bezier(0.34, 1.2, 0.64, 1);
+  opacity: 0.85;
+}
+
+.barCatIcon { font-size: 1rem; margin-top: 4px; }
+
+.barCatName {
+  font-size: 0.62rem;
+  color: #6B7280;
+  text-align: center;
+}
+
+/* ── Transaction section ──────────────────────────── */
+.txSection { padding: 28px; }
+
+.txHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.searchWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(107,114,128,0.07);
+  border: 1px solid rgba(107,114,128,0.12);
+  border-radius: 50px;
+  padding: 8px 16px;
+}
+
+.searchIcon { font-size: 0.85rem; }
+
+.searchInput {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.85rem;
+  color: #1A1F36;
+  width: 180px;
+}
+
+.searchInput::placeholder { color: #9CA3AF; }
+
+.filterRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filterChip {
+  background: rgba(107,114,128,0.07);
+  border: 1px solid rgba(107,114,128,0.12);
+  border-radius: 50px;
+  padding: 6px 16px;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #6B7280;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.filterChip:hover { background: rgba(108,99,255,0.08); color: #6C63FF; border-color: rgba(108,99,255,0.3); }
+
+.filterActive {
+  background: linear-gradient(135deg, #6C63FF22, #8B84FF11);
+  color: #6C63FF;
+  border-color: #6C63FF66;
+  font-weight: 600;
+}
+
+.dateGroup { margin-bottom: 24px; }
+
+.dateLabel {
+  font-size: 0.72rem;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+
+.txList { display: flex; flex-direction: column; gap: 8px; }
+
+.txRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: rgba(107,114,128,0.03);
+  border: 1px solid rgba(107,114,128,0.08);
+  border-radius: 16px;
+  transition: all 0.2s;
+}
+
+.txRow:hover {
+  background: rgba(108,99,255,0.04);
+  border-color: rgba(108,99,255,0.2);
+  transform: translateX(2px);
+}
+
+.txIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.txInfo { flex: 1; min-width: 0; }
+
+.txNote {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1A1F36;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.txCatBadge {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+
+.txRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.txAmount {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FF6B6B;
+  white-space: nowrap;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  padding: 4px;
+}
+
+.txRow:hover .deleteBtn { opacity: 1; }
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #9CA3AF;
+  font-size: 0.875rem;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty span { font-size: 2.5rem; }

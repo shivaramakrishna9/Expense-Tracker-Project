@@ -16,9 +16,12 @@ function Register() {
     email: "",
     password: "",
     confirmPassword: "",
+    monthlyIncome: "",
+    targetSaving: "",
   });
 
   const [error, setError] = useState("");
+  const [recurring, setRecurring] = useState([{ category: "", amount: "" }]);
 
   // Email validation
   const emailRegex =
@@ -47,7 +50,9 @@ function Register() {
       !form.occupation ||
       !form.email ||
       !form.password ||
-      !form.confirmPassword
+      !form.confirmPassword ||
+      !form.monthlyIncome ||
+      !form.targetSaving
     ) {
       setError("Please fill all fields correctly");
       return;
@@ -70,16 +75,26 @@ function Register() {
       return;
     }
 
+    const recurringClean = recurring
+      .map((r) => ({
+        category: (r.category || "").trim(),
+        amount: Number(r.amount),
+      }))
+      .filter((r) => r.category && Number.isFinite(r.amount) && r.amount >= 0);
+
+    if (recurringClean.length === 0) {
+      setError("Please add at least one recurring expense");
+      return;
+    }
+
     try {
-      const response = await fetch('http://localhost:8000/auth/signup', {
-        method: 'POST',
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          full_name: form.fullName,
-          age: parseInt(form.age),
-          occupation: form.occupation,
+          name: form.fullName,
           email: form.email,
           password: form.password,
           confirm_password: form.confirmPassword,
@@ -87,13 +102,24 @@ function Register() {
       });
 
       if (response.ok) {
-        navigate('/login');
+        // Save finance data temporarily and continue with Login page flow.
+        localStorage.setItem(
+          "pendingFinanceSetup",
+          JSON.stringify({
+            monthly_salary: Number(form.monthlyIncome),
+            expected_savings: Number(form.targetSaving),
+            subscriptions: recurringClean,
+            userName: form.fullName,
+          })
+        );
+
+        navigate("/login");
       } else {
         const data = await response.json();
-        setError(data.detail || 'Registration failed');
+        setError(data.detail || "Registration failed");
       }
     } catch (error) {
-      setError('Network error');
+      setError("Network error (is the backend running on port 8000?)");
     }
   };
 
@@ -207,6 +233,91 @@ function Register() {
           onChange={handleChange}
           className="w-full px-6 py-5 mb-5 rounded-2xl bg-white/10 border border-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
+
+        {/* Monthly income + Target saving */}
+        <div className="grid md:grid-cols-2 gap-5 mb-5">
+          <input
+            type="number"
+            name="monthlyIncome"
+            placeholder="Monthly Income"
+            value={form.monthlyIncome}
+            onChange={handleChange}
+            min="0"
+            className="w-full px-6 py-5 rounded-2xl bg-white/10 border border-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+          <input
+            type="number"
+            name="targetSaving"
+            placeholder="Target Saving (per month)"
+            value={form.targetSaving}
+            onChange={handleChange}
+            min="0"
+            className="w-full px-6 py-5 rounded-2xl bg-white/10 border border-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+        </div>
+
+        {/* Recurring expenses */}
+        <div className="mb-6">
+          <p className="text-gray-200 mb-3 text-lg font-semibold">
+            Recurring Expenses
+          </p>
+
+          <div className="space-y-3">
+            {recurring.map((r, idx) => (
+              <div key={idx} className="grid md:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="Category (e.g. Rent)"
+                  value={r.category}
+                  onChange={(e) => {
+                    const next = [...recurring];
+                    next[idx] = { ...next[idx], category: e.target.value };
+                    setRecurring(next);
+                    setError("");
+                  }}
+                  className="w-full px-6 py-4 rounded-2xl bg-white/10 border border-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+                <div className="flex gap-3">
+                  <input
+                    type="number"
+                    placeholder="Amount"
+                    value={r.amount}
+                    min="0"
+                    onChange={(e) => {
+                      const next = [...recurring];
+                      next[idx] = { ...next[idx], amount: e.target.value };
+                      setRecurring(next);
+                      setError("");
+                    }}
+                    className="flex-1 px-6 py-4 rounded-2xl bg-white/10 border border-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setRecurring((prev) => prev.filter((_, i) => i !== idx));
+                      setError("");
+                    }}
+                    disabled={recurring.length === 1}
+                    className="px-5 py-4 rounded-2xl bg-white/10 border border-white/10 text-white disabled:opacity-40"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              setRecurring((prev) => [...prev, { category: "", amount: "" }]);
+              setError("");
+            }}
+            className="mt-4 w-full py-4 rounded-2xl bg-white/10 border border-white/10 text-white hover:bg-white/15 transition"
+          >
+            + Add Recurring Expense
+          </button>
+        </div>
 
         {/* Password */}
         <div className="relative mb-5">

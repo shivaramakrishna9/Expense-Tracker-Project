@@ -108,3 +108,92 @@ code {
 .input {
   @apply px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none;
 }
+
+
+
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  --bg:        #F0F4FF;
+  --surface:   rgba(255,255,255,0.72);
+  --surface2:  rgba(255,255,255,0.5);
+  --border:    rgba(255,255,255,0.9);
+  --text:      #1A1F36;
+  --muted:     #6B7280;
+  --accent1:   #6C63FF;
+  --accent2:   #FF6B6B;
+  --accent3:   #43D9AD;
+  --accent4:   #FFB347;
+  --shadow:    0 8px 32px rgba(108,99,255,0.12);
+  --radius:    20px;
+  --radius-sm: 12px;
+}
+
+
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 { font-family: 'Clash Display', sans-serif; }
+
+/* ── Glassmorphism card ─────────────────────────────────────── */
+.glass {
+  background: var(--surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.glass-sm {
+  background: var(--surface2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: var(--radius-sm);
+}
+
+/* ── Gradient blobs ─────────────────────────────────────────── */
+.blob-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: blobFloat 14s ease-in-out infinite alternate;
+}
+
+.blob-1 { width: 520px; height: 520px; background: #6C63FF; top: -120px; left: -100px; }
+.blob-2 { width: 400px; height: 400px; background: #FF6B6B; top: 40%; right: -80px; animation-delay: -4s; }
+.blob-3 { width: 350px; height: 350px; background: #43D9AD; bottom: -80px; left: 30%; animation-delay: -8s; }
+.blob-4 { width: 280px; height: 280px; background: #FFB347; top: 25%; left: 45%; animation-delay: -2s; opacity: 0.2; }
+
+@keyframes blobFloat {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 40px) scale(1.08); }
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(108,99,255,0.3); border-radius: 10px; }
+
+/* ── Utility ────────────────────────────────────────────────── */
+.page-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}

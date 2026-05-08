@@ -58,10 +58,10 @@ function Login() {
       setLoading(true);
 
       try {
-        const response = await fetch('http://localhost:8000/auth/login', {
-          method: 'POST',
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             email: form.email,
@@ -71,13 +71,40 @@ function Login() {
 
         if (response.ok) {
           const data = await response.json();
-          localStorage.setItem('token', data.access_token);
-          navigate('/form');
+          localStorage.setItem("token", data.access_token);
+
+          // If user just registered, persist the finance setup now.
+          const pending = localStorage.getItem("pendingFinanceSetup");
+          if (pending) {
+            try {
+              const financePayload = JSON.parse(pending);
+              if (financePayload?.userName) {
+                localStorage.setItem("userName", financePayload.userName);
+              }
+
+              await fetch("/subscriptions/setup", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${data.access_token}`,
+                },
+                body: JSON.stringify({
+                  monthly_salary: financePayload.monthly_salary ?? 0,
+                  expected_savings: financePayload.expected_savings ?? 0,
+                  subscriptions: financePayload.subscriptions ?? [],
+                }),
+              });
+            } finally {
+              localStorage.removeItem("pendingFinanceSetup");
+            }
+          }
+
+          navigate("/dashboard");
         } else {
-          setErrors({ general: 'Invalid credentials' });
+          setErrors({ general: "Invalid credentials" });
         }
       } catch (error) {
-        setErrors({ general: 'Network error' });
+        setErrors({ general: "Network error (is the backend running on port 8000?)" });
       } finally {
         setLoading(false);
       }

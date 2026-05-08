@@ -161,11 +161,11 @@ function FormPage() {
     };
 
     try {
-      const response = await fetch('http://localhost:8000/subscriptions/setup', {
-        method: 'POST',
+      const response = await fetch("/subscriptions/setup", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       });
@@ -177,7 +177,7 @@ function FormPage() {
         setError(errorData.detail || 'Failed to save financial data');
       }
     } catch (error) {
-      setError('Network error');
+      setError("Network error (is the backend running on port 8000?)");
     }
   };
 

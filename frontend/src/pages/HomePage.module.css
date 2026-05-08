@@ -1,0 +1,308 @@
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ── Hero ──────────────────────────────────────────── */
+.hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.greeting {
+  font-size: 0.9rem;
+  color: #6B7280;
+  margin-bottom: 6px;
+}
+
+.heroTitle {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #1A1F36;
+  line-height: 1.15;
+}
+
+.grad {
+  background: linear-gradient(135deg, #6C63FF, #FF6B6B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroSub {
+  font-size: 0.85rem;
+  color: #9CA3AF;
+  margin-top: 6px;
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #6C63FF, #8B84FF);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 13px 28px;
+  font-family: 'Clash Display', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(108,99,255,0.35);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.addBtn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(108,99,255,0.45); }
+
+.addBtnIcon {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* ── Stat cards ─────────────────────────────────────── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) { .statsGrid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .statsGrid { grid-template-columns: 1fr; } }
+
+.statCard {
+  background: var(--grad);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 8px 28px var(--sh);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.statCard::after {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 50%;
+}
+
+.statCard:hover { transform: translateY(-4px); }
+
+.statIcon { font-size: 1.8rem; }
+
+.statValue {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.statLabel {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.75);
+  font-weight: 500;
+}
+
+/* ── Two column ─────────────────────────────────────── */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 24px;
+}
+
+@media (max-width: 760px) { .twoCol { grid-template-columns: 1fr; } }
+
+/* ── Savings card ───────────────────────────────────── */
+.savingsCard {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.cardTitle {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1A1F36;
+  align-self: flex-start;
+}
+
+.ringWrap {
+  display: flex;
+  justify-content: center;
+}
+
+.savingsMeta {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.metaItem { text-align: center; flex: 1; }
+
+.metaLabel {
+  font-size: 0.7rem;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.metaValue {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1A1F36;
+}
+
+.metaDivider {
+  width: 1px;
+  background: rgba(0,0,0,0.08);
+  align-self: stretch;
+}
+
+.goalAchieved {
+  font-size: 0.85rem;
+  color: #43D9AD;
+  font-weight: 600;
+  background: rgba(67,217,173,0.1);
+  border: 1px solid rgba(67,217,173,0.3);
+  border-radius: 50px;
+  padding: 6px 16px;
+}
+
+/* ── Recent card ────────────────────────────────────── */
+.recentCard {
+  padding: 28px;
+}
+
+.recentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.viewAll {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #6C63FF;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.viewAll:hover { opacity: 0.7; }
+
+.txList { display: flex; flex-direction: column; gap: 12px; }
+
+.txRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(107,114,128,0.04);
+  border-radius: 14px;
+  transition: background 0.2s;
+}
+
+.txRow:hover { background: rgba(108,99,255,0.05); }
+
+.txIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.txInfo { flex: 1; min-width: 0; }
+
+.txNote {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1A1F36;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.txDate {
+  font-size: 0.72rem;
+  color: #9CA3AF;
+  margin-top: 2px;
+}
+
+.txAmount {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #FF6B6B;
+  white-space: nowrap;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 12px;
+  color: #9CA3AF;
+  font-size: 0.875rem;
+}
+
+/* ── Recurring ──────────────────────────────────────── */
+.recurringSection { padding: 28px; }
+
+.recurringGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.recurringChip {
+  background: rgba(108,99,255,0.06);
+  border: 1px solid rgba(108,99,255,0.15);
+  border-radius: 50px;
+  padding: 10px 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.recurLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4B5563;
+}
+
+.recurAmount {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #6C63FF;
+}
