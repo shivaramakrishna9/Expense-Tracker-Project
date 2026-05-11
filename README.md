@@ -30,8 +30,80 @@ Expense-Tracker-Project/
 
 - Node.js 18+
 - Python 3.10+
+- Docker and Docker Compose (for containerized deployment)
 
 ## Backend Setup (FastAPI)
+
+```powershell
+cd "C:\Users\YourName\Desktop\ExpenseTracker\Expense-Tracker-Project\backend"
+
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+
+pip install -r requirements.txt
+
+copy .env.example .env
+
+# Use python -m uvicorn (safer on restricted Windows setups)
+python -m uvicorn app.main:app --reload --port 8000
+```
+
+Backend URLs:
+- API root: `http://localhost:8000/`
+- Swagger docs: `http://localhost:8000/docs`
+
+## Frontend Setup (React + Vite)
+
+```powershell
+cd "C:\Users\YourName\Desktop\ExpenseTracker\Expense-Tracker-Project\frontend"
+npm install
+npm run dev
+```
+
+Frontend URL:
+- `http://localhost:5173`
+
+## Docker Deployment
+
+For containerized deployment, use Docker Compose.
+
+### Prerequisites for Docker
+
+- Docker installed and running
+- Docker Compose installed
+
+### Build and Run with Docker
+
+1. Clone or navigate to the project root directory.
+
+2. Build and start the services:
+
+   ```bash
+   docker compose up --build
+   ```
+
+   This will:
+   - Build the backend image (Python + FastAPI)
+   - Build the frontend image (Node + Vite)
+   - Start both services
+
+3. Access the application:
+   - Frontend: `http://localhost:5173`
+   - Backend API: `http://localhost:8000`
+   - Backend docs: `http://localhost:8000/docs`
+
+## How to Run (Quick Order)
+
+1. Start backend (`backend/`) on port `8000`
+2. Start frontend (`frontend/`) on port `5173`
+3. Open frontend in browser and test:
+   - Register -> Login -> Dashboard
+
+## Notes
+
+- Frontend uses Vite proxy for API calls to backend.
+- Keep `.env` files private (already covered by `.gitignore`).
+- If you make model/schema-breaking backend changes during development and run into DB issues, remove `backend/app.db` and restart backend to regenerate local tables.
 
 ```powershell
 cd "C:\Users\YourName\Desktop\ExpenseTracker\Expense-Tracker-Project\backend"

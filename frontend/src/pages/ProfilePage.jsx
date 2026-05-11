@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./ProfilePage.module.css";
+import { apiUrl } from "../utils/api";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -20,8 +21,8 @@ export default function ProfilePage() {
     }
 
     Promise.all([
-      fetch("/subscriptions/me", { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json()),
-      fetch("/api/auth/me", { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json()),
+      fetch(apiUrl("/subscriptions/me"), { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json()),
+      fetch(apiUrl("/api/auth/me"), { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json()),
     ])
       .then(([profileRes, meRes]) => {
         setProfile(profileRes);
@@ -45,7 +46,7 @@ export default function ProfilePage() {
         last_month_savings: formData.last_month_savings,
         subscriptions: formData.recurring_expenses,
       });
-      const response = await fetch("/subscriptions/setup", {
+      const response = await fetch(apiUrl("/subscriptions/setup"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +81,7 @@ export default function ProfilePage() {
       return;
     }
     try {
-      await fetch(`/api/auth/delete`, {
+      await fetch(apiUrl(`/api/auth/delete`), {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

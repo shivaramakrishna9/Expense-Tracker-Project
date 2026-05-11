@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import AddExpenseModal from "../components/AddExpenseModal";
 import HomePage from "./HomePage";
 import ExpensesPage from "./ExpensesPage";
+import { apiUrl } from "../utils/api";
 
 export default function Dashboard() {
   const [page, setPage] = useState("home");
@@ -20,9 +21,9 @@ export default function Dashboard() {
     const headers = { Authorization: `Bearer ${token}` };
 
     Promise.all([
-      fetch("/api/expenses", { headers }).then((r) => r.json()),
-      fetch("/subscriptions/me", { headers }).then((r) => r.json()),
-      fetch("/api/auth/me", { headers }).then((r) => r.json()),
+      fetch(apiUrl("/api/expenses"), { headers }).then((r) => r.json()),
+      fetch(apiUrl("/subscriptions/me"), { headers }).then((r) => r.json()),
+      fetch(apiUrl("/api/auth/me"), { headers }).then((r) => r.json()),
     ])
       .then(([expensesRes, profileRes, meRes]) => {
         if (Array.isArray(expensesRes)) setExpenses(expensesRes);
@@ -41,7 +42,7 @@ export default function Dashboard() {
   const handleAddExpense = async (expense) => {
     setSaveError("");
     try {
-      const response = await fetch("/api/expenses", {
+      const response = await fetch(apiUrl("/api/expenses"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +66,7 @@ export default function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`/api/expenses/${id}`, {
+      const response = await fetch(apiUrl(`/api/expenses/${id}`), {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

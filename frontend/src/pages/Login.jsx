@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Eye, EyeOff, Mail, Lock, ShieldCheck } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { apiUrl } from "../utils/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ function Login() {
       setLoading(true);
 
       try {
-        const response = await fetch("/api/auth/login", {
+        const response = await fetch(apiUrl("/api/auth/login"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -82,7 +83,7 @@ function Login() {
                 localStorage.setItem("userName", financePayload.userName);
               }
 
-              await fetch("/subscriptions/setup", {
+              await fetch(apiUrl("/subscriptions/setup"), {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

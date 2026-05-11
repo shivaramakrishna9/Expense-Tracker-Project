@@ -11,6 +11,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { apiUrl } from "../utils/api";
 
 /* Reusable Input */
 function InputField({
@@ -161,7 +162,7 @@ function FormPage() {
     };
 
     try {
-      const response = await fetch("/subscriptions/setup", {
+      const response = await fetch(apiUrl("/subscriptions/setup"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
