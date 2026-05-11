@@ -85,12 +85,6 @@ export default function ExpensesPage({ expenses, onAddExpense, onDelete }) {
           <p className={styles.summLabel}>Transactions</p>
           <p className={styles.summValue}>{expenses.length}</p>
         </div>
-        <div className={`glass-sm ${styles.summChip}`} style={{ "--c": "#FFB347" }}>
-          <p className={styles.summLabel}>Avg / Transaction</p>
-          <p className={styles.summValue}>
-            ₹{expenses.length ? Math.round(totalExpenses / expenses.length).toLocaleString("en-IN") : 0}
-          </p>
-        </div>
       </div>
 
       {/* Two-column layout */}

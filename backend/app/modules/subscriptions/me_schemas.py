@@ -9,5 +9,6 @@ class RecurringItem(BaseModel):
 class SubscriptionsMeResponse(BaseModel):
     monthly_income: int
     target_saving: int
+    last_month_savings: int
     recurring_expenses: list[RecurringItem]
 

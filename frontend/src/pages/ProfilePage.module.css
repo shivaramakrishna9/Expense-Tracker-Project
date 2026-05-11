@@ -1,0 +1,210 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: "Clash Display", sans-serif;
+  font-size: 2rem;
+  color: #111;
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
+
+.homeBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+  border: 1px solid rgba(209, 213, 219, 0.4);
+  cursor: pointer;
+  font-family: "Sora", sans-serif;
+  font-size: 0.875rem;
+}
+
+.successMsg {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  padding: 0.75rem;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: "Sora", sans-serif;
+}
+
+.section {
+  margin-bottom: 1rem;
+}
+
+.label {
+  font-family: "Sora", sans-serif;
+  color: #6B7280;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.value {
+  font-family: "Sora", sans-serif;
+  color: #111;
+  font-size: 1rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(209, 213, 219, 0.8);
+  color: #111;
+  font-family: "Sora", sans-serif;
+  outline: none;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.input::placeholder {
+  color: #9CA3AF;
+}
+
+.recurringSection {
+  margin-bottom: 1.5rem;
+}
+
+.recurringRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.removeBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: none;
+  cursor: pointer;
+}
+
+.addBtn {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #111;
+  border: 1px solid rgba(209, 213, 219, 0.8);
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.editBtn, .saveBtn, .cancelBtn {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 12px;
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.editBtn {
+  background: linear-gradient(135deg, #6C63FF, #8B84FF);
+  color: white;
+}
+
+.saveBtn {
+  background: linear-gradient(135deg, #22C55E, #16A34A);
+  color: white;
+}
+
+.cancelBtn {
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+  border: 1px solid rgba(209, 213, 219, 0.8);
+}
+
+.bottomActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logoutBtn {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+  border: 1px solid rgba(209, 213, 219, 0.8);
+  cursor: pointer;
+}
+
+.deleteBtn {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  font-family: "Sora", sans-serif;
+}

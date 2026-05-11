@@ -9,5 +9,6 @@ class SubscriptionItemIn(BaseModel):
 class SetupRequest(BaseModel):
     monthly_salary: int = Field(ge=0)
     expected_savings: int = Field(ge=0)
+    last_month_savings: int = Field(ge=0, default=0)
     subscriptions: list[SubscriptionItemIn]
 

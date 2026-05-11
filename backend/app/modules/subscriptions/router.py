@@ -19,11 +19,13 @@ def setup(payload: SetupRequest, current_user: User = Depends(get_current_user),
     if profile:
         profile.monthly_salary = payload.monthly_salary
         profile.expected_savings = payload.expected_savings
+        profile.last_month_savings = payload.last_month_savings
     else:
         profile = FinanceProfile(
             user_id=current_user.id,
             monthly_salary=payload.monthly_salary,
             expected_savings=payload.expected_savings,
+            last_month_savings=payload.last_month_savings,
         )
         db.add(profile)
 
@@ -45,7 +47,7 @@ def setup(payload: SetupRequest, current_user: User = Depends(get_current_user),
 def me(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     profile = db.get(FinanceProfile, current_user.id)
     if not profile:
-        return {"monthly_income": 0, "target_saving": 0, "recurring_expenses": []}
+        return {"monthly_income": 0, "target_saving": 0, "last_month_savings": 0, "recurring_expenses": []}
 
     items = (
         db.query(SubscriptionItem)
@@ -57,6 +59,7 @@ def me(current_user: User = Depends(get_current_user), db: Session = Depends(get
     return {
         "monthly_income": profile.monthly_salary,
         "target_saving": profile.expected_savings,
+        "last_month_savings": profile.last_month_savings,
         "recurring_expenses": [{"category": i.category, "amount": i.amount} for i in items],
     }
 

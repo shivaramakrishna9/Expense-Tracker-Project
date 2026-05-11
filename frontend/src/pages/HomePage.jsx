@@ -40,10 +40,17 @@ const STAT_CARDS = (expenses, profile) => {
   ];
 };
 
-function SavingsRing({ pct }) {
+function SavingsRing({ currentSavings, lastMonthSavings }) {
   const r = 60;
   const circ = 2 * Math.PI * r;
-  const dash = (pct / 100) * circ;
+  const topUp = Math.max(0, currentSavings - lastMonthSavings);
+  const total = Math.max(1, currentSavings);
+  
+  const lastMonthPct = (lastMonthSavings / total) * 100;
+  const topUpPct = (topUp / total) * 100;
+  
+  const lastMonthDash = (lastMonthPct / 100) * circ;
+  const topUpDash = (topUpPct / 100) * circ;
 
   return (
     <svg width="150" height="150" viewBox="0 0 150 150">
@@ -53,24 +60,30 @@ function SavingsRing({ pct }) {
         cy="75"
         r={r}
         fill="none"
-        stroke="url(#ringGrad)"
+        stroke="#38B2AC"
         strokeWidth="12"
         strokeLinecap="round"
-        strokeDasharray={`${dash} ${circ}`}
+        strokeDasharray={`${lastMonthDash} ${circ}`}
         strokeDashoffset={circ / 4}
         style={{ transition: "stroke-dasharray 1s ease" }}
       />
-      <defs>
-        <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#6C63FF" />
-          <stop offset="100%" stopColor="#43D9AD" />
-        </linearGradient>
-      </defs>
-      <text x="75" y="70" textAnchor="middle" fill="#1A1F36" fontSize="22" fontFamily="Clash Display" fontWeight="700">
-        {pct}%
+      <circle
+        cx="75"
+        cy="75"
+        r={r}
+        fill="none"
+        stroke="#22C55E"
+        strokeWidth="12"
+        strokeLinecap="round"
+        strokeDasharray={`${topUpDash} ${circ}`}
+        strokeDashoffset={(circ / 4) - lastMonthDash}
+        style={{ transition: "stroke-dasharray 1s ease" }}
+      />
+      <text x="75" y="70" textAnchor="middle" fill="#1A1F36" fontSize="20" fontFamily="Clash Display" fontWeight="700">
+        ₹{currentSavings.toLocaleString("en-IN")}
       </text>
       <text x="75" y="90" textAnchor="middle" fill="#6B7280" fontSize="10" fontFamily="Sora">
-        of goal
+        Total Saved
       </text>
     </svg>
   );
@@ -82,10 +95,9 @@ export default function HomePage({ expenses, onNavigate, onAddExpense, profile, 
     profile?.recurring_expenses?.reduce((s, e) => s + e.amount, 0) ?? 0;
   const variableTotal = expenses.reduce((s, e) => s + e.amount, 0);
   const monthlyIncome = profile?.monthly_income ?? 0;
-  const targetSaving = profile?.target_saving ?? 0;
+  const lastMonthSavings = profile?.last_month_savings ?? 0;
 
   const savings = Math.max(0, monthlyIncome - recurringTotal - variableTotal);
-  const savingsPct = targetSaving > 0 ? Math.min(100, Math.round((savings / targetSaving) * 100)) : 0;
 
   // Recent 4 expenses
   const recent = expenses.slice(0, 4);
@@ -121,31 +133,32 @@ export default function HomePage({ expenses, onNavigate, onAddExpense, profile, 
       <section className={styles.twoCol}>
         {/* Savings goal */}
         <div className={`glass ${styles.savingsCard}`}>
-          <h3 className={styles.cardTitle}>Monthly Savings Goal</h3>
+          <h3 className={styles.cardTitle}>Savings Performance</h3>
           <div className={styles.ringWrap}>
-            <SavingsRing pct={savingsPct} />
+            <SavingsRing currentSavings={savings} lastMonthSavings={lastMonthSavings} />
           </div>
           <div className={styles.savingsMeta}>
             <div className={styles.metaItem}>
-              <p className={styles.metaLabel}>Saved</p>
-              <p className={styles.metaValue} style={{ color: "#43D9AD" }}>
+              <p className={styles.metaLabel}>Last Month Saved</p>
+              <p className={styles.metaValue} style={{ color: "#38B2AC" }}>
+                ₹{lastMonthSavings.toLocaleString("en-IN")}
+              </p>
+            </div>
+            <div className={styles.metaDivider} />
+            <div className={styles.metaItem}>
+              <p className={styles.metaLabel}>Top Up</p>
+              <p className={styles.metaValue} style={{ color: "#22C55E" }}>
+                ₹{Math.max(0, savings - lastMonthSavings).toLocaleString("en-IN")}
+              </p>
+            </div>
+            <div className={styles.metaDivider} />
+            <div className={styles.metaItem}>
+              <p className={styles.metaLabel}>Current Total</p>
+              <p className={styles.metaValue}>
                 ₹{savings.toLocaleString("en-IN")}
               </p>
             </div>
-            <div className={styles.metaDivider} />
-            <div className={styles.metaItem}>
-              <p className={styles.metaLabel}>Target</p>
-              <p className={styles.metaValue}>₹{targetSaving.toLocaleString("en-IN")}</p>
-            </div>
-            <div className={styles.metaDivider} />
-            <div className={styles.metaItem}>
-              <p className={styles.metaLabel}>Remaining</p>
-              <p className={styles.metaValue} style={{ color: "#FF6B6B" }}>
-                ₹{Math.max(0, targetSaving - savings).toLocaleString("en-IN")}
-              </p>
-            </div>
           </div>
-          {savingsPct >= 100 && <p className={styles.goalAchieved}>🎉 Goal achieved this month!</p>}
         </div>
 
         {/* Recent transactions */}

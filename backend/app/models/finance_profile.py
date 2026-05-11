@@ -12,4 +12,5 @@ class FinanceProfile(Base):
     )
     monthly_salary: Mapped[int] = mapped_column(Integer)
     expected_savings: Mapped[int] = mapped_column(Integer)
+    last_month_savings: Mapped[int] = mapped_column(Integer, default=0)
 

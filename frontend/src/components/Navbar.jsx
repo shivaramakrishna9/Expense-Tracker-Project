@@ -70,6 +70,16 @@ export default function Navbar({ page, onNavigate, userName }) {
               <button
                 type="button"
                 className={styles.menuItem}
+                onClick={() => {
+                  navigate("/profile");
+                  setMenuOpen(false);
+                }}
+              >
+                Profile
+              </button>
+              <button
+                type="button"
+                className={styles.menuItem}
                 onClick={handleLogout}
               >
                 Logout
