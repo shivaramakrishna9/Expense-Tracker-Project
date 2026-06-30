@@ -1,0 +1,128 @@
+Expense Tracker Project Description
+Overview
+Expense Tracker is a personal finance management web application designed to help individuals take control of their day-to-day spending, monitor their income, and work toward achieving their monthly savings goals. The application provides a structured, user-friendly environment where anyone can record their earnings and expenditures, visualize where their money is going, and understand how close they are to reaching a savings target they set for themselves.
+Purpose and Problem Statement
+Many people struggle to understand where their money goes each month. Salaries come in, bills go out, and by the end of the month, very little is left often without a clear explanation. The Expense Tracker solves this by giving users a single, organized place to record every rupee earned and spent, so they always know their financial position in real time.
+Who Is This For?
+This application is built for everyday individuals, students, salaried professionals, freelancers, or homemakers who want a simple and private tool to manage personal finances without the complexity of spreadsheets or accounting software.
+
+
+How the Application Works 
+1. Registration
+A new user begins by creating an account. During registration, they provide:
+Full name, email address, and a secure password — for account identity and login.
+Basic personal details — such as age, gender, and occupation (optional, for profile context).
+Monthly income — the total amount the user earns in a month (salary, freelance income, allowance, etc.).
+Recurring fixed expenses — bills that are paid every month without variation, such as rent, EMIs, electricity, internet, subscriptions, or insurance premiums. These are entered once and automatically accounted for every month.
+Monthly savings goal — the exact amount in rupees that the user wants to have saved by the end of the month. This is the most important figure the app works toward.
+2. Login
+Returning users log in with their email and password. The application securely authenticates them and takes them directly to their personal dashboard.
+3. The Dashboard
+The dashboard is the central screen of the application. It gives the user an at-a-glance financial summary for the current month, including:
+Total income for the month.
+Total recurring expenses (pre-filled from registration).
+Total variable expenses entered so far.
+Current savings (income minus all expenses).
+A savings goal progress indicator showing how close the user is to their target — displayed as a progress bar or percentage, e.g., "You have saved ₹4,200 of your ₹8,000 goal — 52% achieved."
+4. Logging Expenses
+Throughout the month, the user manually records every expense they make. Each expense entry requires:
+Category — the type of spending. Pre-defined categories include:
+ Food & Dining
+ Shopping
+ Transport
+ Health & Medical
+ Entertainment
+ Education
+ Utilities & Bills
+Travel
+ Gifts & Donations
+ Miscellaneous
+Amount — how much was spent.
+Date — when the expense occurred.
+Note (optional) — a short description, e.g., "Lunch at office canteen" or "New running shoes."
+5. Savings Calculation
+The application continuously calculates the user's savings using the formula:
+Savings = Monthly Income − Recurring Fixed Expenses − Sum of All Variable Expenses Logged
+This figure is compared against the user's savings goal to show how much more needs to be saved or whether the goal has already been exceeded.
+6. Profile Management
+The user can revisit their profile at any time to:
+Update personal details.
+Adjust monthly income (e.g., if they received a bonus or changed jobs).
+Add, edit, or remove recurring expenses.
+Revise their monthly savings goal.
+Feature
+Description
+User Registration & Login
+Secure account creation and authentication
+Income Entry
+Monthly income recorded per user
+Recurring Expense Setup
+Fixed monthly bills entered once, auto-applied
+Savings Goal
+User-defined monthly savings target
+Expense Logging
+Manual entry with categories, amount, date, and notes
+Live Savings Tracker
+Real-time calculation of current savings vs. goal
+Goal Progress Indicator
+Visual display of how close the user is to their target
+Category Breakdown
+Spending split across food, shopping, transport, etc.
+Profile Management
+Edit income, expenses, and goals anytime
+
+Folder Structure 
+
+backend/
+│
+├── app/
+│   ├── main.py                # Entry point
+│
+│   ├── core/                 # Core system configs
+│   │   ├── config.py
+│   │   ├── security.py       # JWT logic
+│   │   ├── middleware.py     # Auth middleware
+│   │
+│   ├── db/
+│   │   ├── session.py        # DB connection
+│   │   ├── base.py           # Base model
+│   │
+│   ├── models/               # SQLAlchemy models
+│   │   ├── user.py
+│   │   ├── transaction.py
+│   │   ├── subscription.py
+│   │
+│   ├── modules/              # Feature-based modules
+│   │
+│   │   ├── users/
+│   │   │   ├── router.py     # API routes
+│   │   │   ├── service.py    # Business logic
+│   │   │   ├── schemas.py    # Pydantic models
+│   │   │
+│   │   ├── transactions/
+│   │   │   ├── router.py
+│   │   │   ├── service.py
+│   │   │   ├── schemas.py
+│   │   │
+│   │   ├── analytics/
+│   │   │   ├── router.py
+│   │   │   ├── service.py
+│   │   │   ├── schemas.py
+│   │   │
+│   │   ├── subscriptions/
+│   │   │   ├── router.py
+│   │   │   ├── service.py
+│   │   │   ├── schemas.py
+│
+│   ├── utils/
+│   │   ├── helpers.py
+│   │   ├── constants.py
+│
+│   ├── dependencies/         # shared dependencies
+│   │   ├── auth.py
+│
+├── requirements.txt
+└── README.md
+
+
+USE CASE DIAGRAM
